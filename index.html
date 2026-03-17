@@ -493,6 +493,38 @@
     textarea.form-input { min-height: 120px; resize: vertical; }
     .form-submit { width: 100%; justify-content: center; }
 
+    /* ╔══════════════════════════════╗
+       ║       WHATSAPP BUTTON        ║
+       ╚══════════════════════════════╝ */
+    .whatsapp-float {
+      position: fixed; bottom: 30px; right: 30px; z-index: 9999;
+      width: 60px; height: 60px; background-color: #25D366;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+      animation: zoomIn 0.8s ease-out;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+    }
+    .whatsapp-float svg {
+      width: 32px; height: 32px; fill: white;
+    }
+    /* Simple bounce for attention */
+    @keyframes whatsappBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .whatsapp-float { animation: zoomIn 0.8s ease-out, whatsappBounce 4s ease-in-out infinite 2s; }
+    
+    @keyframes zoomIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+
     @media (max-width: 900px) {
       .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 40px; }
       .hero-sub { max-width: 100%; margin-left: auto; margin-right: auto; }
@@ -1018,5 +1050,17 @@
       });
     }
   </script>
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/5511955517010?text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+as+landing+pages+da+Flowy." 
+     class="whatsapp-float" 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24">
+      <path d="M12.031 6.172c-2.315 0-4.195 1.88-4.195 4.194 0 .746.208 1.484.599 2.13l-.636 2.327 2.381-.624c.624.34 1.326.521 2.031.521 2.315 0 4.195-1.88 4.195-4.194.001-2.314-1.88-4.194-4.175-4.194zm3.019 5.922c-.12.336-.711.644-.99.688-.28.044-.608.068-1.02.068-.412 0-1.012-.132-1.58-.401-.568-.269-1.012-.663-1.424-1.12-.412-.457-.696-.948-.828-1.392-.132-.444-.06-.852.12-1.164.18-.312.384-.468.516-.588l.384-.36c.072-.072.18-.12.264-.12.084 0 .156.036.216.096l.6 1.056c.06.12.06.24 0 .336l-.312.444c-.06.072-.072.144-.024.228.048.084.216.372.456.624.24.252.54.408.768.492.228.084.348.072.42-.012l.336-.444c.06-.06.12-.084.18-.084.06 0 .12.024.168.048l1.176.576c.12.06.168.12.204.204.036.084.024.216-.072.48zM12 2C6.477 2 2 6.477 2 12c0 1.833.498 3.55 1.364 5.022L2 22l5.122-1.341c1.45.82 3.12 1.341 4.878 1.341 5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.583 0-3.07-.442-4.34-1.214l-.31-.186L4.3 19.5l.915-3.344-.22-.351A7.957 7.957 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"></path>
+    </svg>
+  </a>
+
 </body>
+
 </html>
