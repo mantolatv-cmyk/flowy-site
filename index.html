@@ -116,10 +116,13 @@
             background: transparent;
             border: 2px solid var(--white);
             color: var(--white);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .btn-outline:hover {
             background: rgba(255, 255, 255, 0.1);
+            border-color: var(--mint);
+            color: var(--mint);
         }
 
         /* ─── SCROLL ANIMATION ─── */
@@ -160,10 +163,11 @@
         }
 
         #navbar.scrolled {
-            background: rgba(13, 27, 75, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 2px 24px rgba(0, 0, 0, 0.18);
+            background: rgba(13, 27, 75, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+            padding: 12px 0;
         }
 
         .nav-inner {
@@ -207,6 +211,18 @@
         .nav-cta {
             padding: 10px 24px;
             font-size: .9rem;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            transform: translateY(10px);
+        }
+
+        .nav-cta.visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
         }
 
         /* Hamburger */
@@ -242,20 +258,29 @@
         }
 
         .mobile-menu {
-            display: none;
+            display: flex;
             flex-direction: column;
             gap: 24px;
             position: absolute;
             top: 100%;
             left: 0;
             right: 0;
-            background: rgba(13, 27, 75, 0.97);
+            background: rgba(13, 27, 75, 0.98);
             padding: 28px 24px;
-            backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            pointer-events: none;
         }
 
         .mobile-menu.open {
-            display: flex;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
         }
 
         .mobile-menu a {
@@ -289,6 +314,8 @@
             border-radius: 50%;
             background: radial-gradient(circle, rgba(42, 255, 168, 0.12) 0%, transparent 70%);
             animation: blobFloat 8s ease-in-out infinite;
+            will-change: transform;
+            pointer-events: none;
         }
 
         #hero::after {
@@ -301,6 +328,8 @@
             border-radius: 50%;
             background: radial-gradient(circle, rgba(123, 47, 255, 0.18) 0%, transparent 70%);
             animation: blobFloat 10s ease-in-out infinite reverse;
+            will-change: transform;
+            pointer-events: none;
         }
 
         @keyframes blobFloat {
@@ -362,12 +391,13 @@
         }
 
         .hero-title {
-            color: var(--white);
             margin-bottom: 18px;
-            background: linear-gradient(135deg, #fff 0%, var(--mint) 100%);
+            background: linear-gradient(135deg, #ffffff 0%, var(--mint) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            color: transparent;
+            display: block;
         }
 
         .hero-sub {
@@ -420,15 +450,13 @@
         .device-wrap {
             animation: floatDevice 4s ease-in-out infinite;
             filter: drop-shadow(0 40px 60px rgba(42, 255, 168, 0.25)) drop-shadow(0 0 80px rgba(123, 47, 255, 0.3));
+            will-change: transform;
         }
 
         @keyframes floatDevice {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: translateY(0) rotate3d(1, 2, 0, 8deg);
             }
-
             50% {
                 transform: translateY(-18px) rotate3d(1, 2, 0, 12deg);
             }
@@ -483,26 +511,26 @@
         }
 
         .screen-hero-bar {
-            height: 28px;
+            height: 12%;
             background: linear-gradient(90deg, rgba(42, 255, 168, 0.6), rgba(123, 47, 255, 0.4));
             border-radius: 6px;
-            margin-bottom: 10px;
+            margin-bottom: 4%;
         }
 
         .screen-sub-bar {
-            height: 10px;
+            height: 4%;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 5px;
             width: 70%;
-            margin-bottom: 16px;
+            margin-bottom: 6%;
         }
 
         .screen-btn {
-            height: 18px;
-            width: 90px;
+            height: 8%;
+            width: 30%;
             background: linear-gradient(90deg, var(--electric), var(--magenta));
             border-radius: 9px;
-            margin-bottom: 20px;
+            margin-bottom: 8%;
         }
 
         .screen-cards {
@@ -1366,6 +1394,11 @@
             .hamburger {
                 display: flex;
             }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
         }
 
         @media (max-width: 600px) {
@@ -1377,7 +1410,7 @@
                 grid-template-columns: 1fr;
             }
 
-            .footer-bottom {
+             .footer-bottom {
                 flex-direction: column;
                 gap: 16px;
                 text-align: center;
@@ -1399,6 +1432,14 @@
             #cta,
             #process {
                 padding: 80px 0;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid::before {
+                display: none;
             }
         }
 
@@ -1610,32 +1651,30 @@
     <!-- ═══════════ PROCESS ═══════════ -->
     <section id="process">
         <div class="container">
-            <div class="reveal">
-                <center>
-                    <span class="section-label">Como trabalhamos</span>
-                    <h2 class="section-title" style="color:white;">O fluxo para o <em
-                            style="font-style:normal; color:var(--mint);">sucesso</em></h2>
-                    <p class="section-sub" style="color:rgba(255,255,255,0.7);">Um processo validado para transformar
-                        cliques em faturamento real.</p>
-                </center>
+            <div class="reveal" style="text-align: center;">
+                <span class="section-label">Como trabalhamos</span>
+                <h2 class="section-title" style="color:white;">O fluxo para o <em
+                        style="font-style:normal; color:var(--mint);">sucesso</em></h2>
+                <p class="section-sub" style="color:rgba(255,255,255,0.7); margin-left: auto; margin-right: auto;">Um processo validado para transformar
+                    cliques em faturamento real.</p>
             </div>
-            <div class="process-grid">
-                <div class="process-item reveal reveal-delay-1">
+            <div class="process-grid reveal">
+                <div class="process-item reveal-delay-1">
                     <div class="process-number">01</div>
                     <h3>Estratégia</h3>
                     <p>Analisamos seu mercado, público e concorrentes para criar uma fundação sólida.</p>
                 </div>
-                <div class="process-item reveal reveal-delay-2">
+                <div class="process-item reveal-delay-2">
                     <div class="process-number">02</div>
                     <h3>Copy & Design</h3>
                     <p>Escrita persuasiva aliada a um visual que retém e converte o visitante.</p>
                 </div>
-                <div class="process-item reveal reveal-delay-3">
+                <div class="process-item reveal-delay-3">
                     <div class="process-number">03</div>
                     <h3>Desenvolvimento</h3>
                     <p>Código limpo, rápido e otimizado para que seu site voe em qualquer dispositivo.</p>
                 </div>
-                <div class="process-item reveal reveal-delay-4">
+                <div class="process-item reveal-delay-4">
                     <div class="process-number">04</div>
                     <h3>Performance</h3>
                     <p>Configuração de tags, tracking e otimização contínua para escalar seus resultados.</p>
@@ -1797,12 +1836,10 @@
     <!-- ═══════════ FAQ ═══════════ -->
     <section id="faq">
         <div class="container">
-            <div class="reveal">
-                <center>
-                    <span class="section-label">Dúvidas</span>
-                    <h2 class="section-title">Perguntas Frequentes</h2>
-                    <p class="section-sub">Tudo o que você precisa saber antes de começarmos o seu projeto.</p>
-                </center>
+            <div class="reveal" style="text-align: center;">
+                <span class="section-label">Dúvidas</span>
+                <h2 class="section-title">Perguntas Frequentes</h2>
+                <p class="section-sub" style="margin-left: auto; margin-right: auto;">Tudo o que você precisa saber antes de começarmos o seu projeto.</p>
             </div>
             <div class="faq-container reveal reveal-delay-1">
                 <div class="faq-item">
@@ -1913,9 +1950,15 @@
             <div class="footer-bottom">
                 <span class="footer-copy">© 2026 Flowy. Todos os direitos reservados.</span>
                 <div class="footer-socials">
-                    <a href="#" class="social-btn" aria-label="Instagram">ig</a>
-                    <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
-                    <a href="#" class="social-btn" aria-label="Twitter/X">𝕏</a>
+                    <a href="#" class="social-btn" aria-label="Instagram">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="#" class="social-btn" aria-label="LinkedIn">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                    <a href="#" class="social-btn" aria-label="Twitter/X">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1926,12 +1969,12 @@
         const navbar = document.getElementById('navbar');
         const navCta = document.getElementById('navCta');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 60) {
+            if (window.scrollY > 120) {
                 navbar.classList.add('scrolled');
-                navCta.style.display = 'inline-flex';
+                navCta.classList.add('visible');
             } else {
                 navbar.classList.remove('scrolled');
-                navCta.style.display = 'none';
+                navCta.classList.remove('visible');
             }
         });
 
@@ -1956,7 +1999,7 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.12 });
+        }, { threshold: 0.08 });
         reveals.forEach(el => observer.observe(el));
 
         /* ─── HERO CONTENT ANIMATE ON LOAD ─── */
@@ -2004,9 +2047,9 @@
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
             question.addEventListener('click', () => {
-                const isOpen = item.classList.contains('active');
+                const isActive = item.classList.contains('active');
                 faqItems.forEach(i => i.classList.remove('active'));
-                if (!isOpen) item.classList.add('active');
+                if (!isActive) item.classList.add('active');
             });
         });
 
