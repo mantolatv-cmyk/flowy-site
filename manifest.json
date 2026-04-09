@@ -1,0 +1,17 @@
+{
+  "name": "Flowy - Landing Pages",
+  "short_name": "Flowy",
+  "description": "Agência de landing pages de alta conversão. Design, Copy e Velocidade.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0D1B4B",
+  "theme_color": "#2AFFA8",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "img/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

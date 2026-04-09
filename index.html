@@ -9,6 +9,11 @@
         content="Flowy é a agência de landing pages de alta conversão que transforma cliques em clientes. Design, Copywriting e Performance que vendem." />
     <meta property="og:title" content="Flowy — Onde o clique vira cliente" />
     <meta property="og:description" content="Landing pages que convertem. Design, Copy e Velocidade no mesmo lugar." />
+    <!-- PWA Config -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#2AFFA8" />
+    <link rel="apple-touch-icon" href="/img/icon-512x512.png" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -2091,6 +2096,20 @@
         </svg>
     </a>
 
+    <!-- Service Worker Registration for PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+    </script>
 </body>
 
 </html>
